@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebChannel TypeScript Web Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      max-width: 800px;
+    }
+    .input-group {
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      width: 60%;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      background-color: #6c757d !important;
+    }
+    textarea {
+      width: 100%;
+      height: 400px;
+      font-family: monospace;
+      font-size: 14px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>WebChannel TypeScript Web Demo</h1>
+    <p>This demo uses the compiled Closure WebChannel JS bundle to talk to the local echo server backend.</p>
+    
+    <div class="input-group" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+      <label for="endpoint" style="font-weight: bold;">Endpoint:</label>
+      <select id="endpoint" style="padding: 6px; font-size: 15px; border-radius: 4px; border: 1px solid #ccc;">
+        <option value="https://webchannel.sandbox.google.com/staging/channel/generator" selected>Generator Server (Streaming)</option>
+        <option value="https://webchannel.sandbox.google.com/staging/channel/echo">Echo Server (Latency Test)</option>
+        <option value="custom">Custom Endpoint...</option>
+      </select>
+      <input type="text" id="custom-endpoint" value="" placeholder="Enter custom URL..." style="display: none; width: 45%; padding: 6px; font-size: 15px; border-radius: 4px; border: 1px solid #ccc;" />
+    </div>
+
+    <div class="input-group" style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-bottom: 20px;">
+      <span style="font-weight: bold;">Options:</span>
+      <label><input type="checkbox" id="sendRawJson" checked> sendRawJson</label>
+      <label><input type="checkbox" id="detectBufferingProxy"> detectBufferingProxy</label>
+      <label><input type="checkbox" id="forceLongPolling"> forceLongPolling</label>
+      <label><input type="checkbox" id="fastHandshake"> fastHandshake</label>
+    </div>
+
+    <div class="input-group" style="display: flex; gap: 10px; align-items: center;">
+      <button id="connect" style="background-color: #28a745;">Connect</button>
+      <button id="disconnect" style="background-color: #dc3545;" disabled>Disconnect</button>
+      <span id="status-badge" style="font-size: 14px; font-weight: bold; padding: 4px 8px; border-radius: 12px; margin-left: 10px; background-color: #6c757d; color: white;">Disconnected</span>
+    </div>
+
+    <div class="input-group">
+      <input type="text" id="message" value="Hello WebChannel!" placeholder="Enter message to send..." />
+      <button id="send" disabled>Send Message</button>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; margin-top: 20px;">
+      <h3 style="margin: 0;">Connection Logs</h3>
+      <button id="clear" style="background-color: #6c757d; padding: 4px 8px; font-size: 13px;">Clear Logs</button>
+    </div>
+    <textarea id="log" readonly></textarea>
+  </div>
+  
+  <script src="dist/demo.js"></script>
+</body>
+</html>
